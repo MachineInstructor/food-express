@@ -1,0 +1,58 @@
+<%- include ('../partials/header')%>
+
+<div class="container">
+    <% result.forEach(function(order){ %>
+    
+    <div class="row">
+            <h4>Will be delivered within 2 hour! enjoy your meal!!</h4>
+        </div>
+    
+ <div class="row"style="display:flex; flex-wrap: wrap; padding:10px 0">
+      <% order.image.forEach(function(image){ %>
+    <div class="col-md-2">
+        <div class="img-thumbnail">
+            <img  src="<%=image%>" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+         <% }); %>
+         </div>
+         <div class="row">
+         <% order.name.forEach(function(name){ %>
+         <div class="col-md-2">
+            <div class="caption">
+            <p><a href="#" class="text-success"><%=name%></a></p>
+            </div>
+            </div>
+            <% }); %>
+         </div>
+       <div class="row">
+          <% order.peice.forEach(function(peice){ %>
+          <div class="col-md-2">
+            <p id="inline"class="text-muted"><%= peice%> peice</p>
+            </div>
+            <% }); %>
+       </div> 
+       <div class="row">
+         <% order.price.forEach(function(price){ %>
+         <div class="col-md-2">
+         <p id="inline"class="text-muted"><%= price%>/ peice</p>
+          </div>
+         <% }); %>
+
+         </div>
+          <div class="row">
+           <p><strong>Name-</strong><%=order.firstname%>&nbsp;&nbsp;<%=order.lastname%></p> 
+        </div>
+        <div class="row">
+            <p><strong>Address-</strong><%=order.address%>.</p>
+        </div>
+        <div class="row">
+            <p><strong>Contact-</strong><%=order.contact%>.</p>
+        </div>
+        <div class="row">
+           <p><strong>Payment type-</strong><%=order.payment%></p> 
+        </div>
+<hr>
+<% }); %>
+</div>
+<%- include ('../partials/footer')%>

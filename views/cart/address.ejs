@@ -1,0 +1,80 @@
+<%- include ('../partials/header')%>
+
+<%var total=0;var x =0;var oid=0%>
+<% user.cart.forEach(function(cart){ %>
+   <%total=total+(parseInt(cart.obj.price)*parseInt(cart.peice))%>
+<% }); %>
+<%oid=user.order.length%>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+   
+<div class="col-md-4">
+    <form action="/<%=currentuser._id%>/cart/checkout/newaddress" method="get">
+    <button class="btn btn-warning">Add new address</button>
+</form>
+<form action="/<%=currentuser._id%>/cart/validate/order/<%=total%>/<%=oid%>" method="post" onsubmit="return ischecked()">
+    <div class="row">
+        <div class="col-md-12">
+        <h2 class="text-info">ADDRESS</h2>
+    <% user.address.forEach(function(address){ %>
+    <div class="form-check" id="inline">
+  <input class="form-check-input" type="radio" name="address[address]" id="inlineRadio1" value="<%=x=x+1%>" required>
+  <label class="form-check-label" for="inlineRadio1"><%=address.address%><br><%=address.address2%><br><%=address.city%><br><%=address.state%><br><%=address.zip%><br></label>
+</div>
+<hr>
+<% }); %>
+</div>
+</div>
+<div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+    <h2 class="text-info">PAYMENTS</h2>
+<div class="form-check" id="inline">
+  <input class="form-check-input" type="radio" name="address[payment]" id="inlineRadio2" value="cash on delivery" required>
+  <label class="form-check-label" for="inlineRadio2">Cash on delivery</label>
+</div>
+<hr>
+<div class="form-check" id="inline">
+  <input class="form-check-input" type="radio" name="address[payment]" id="inlineRadio2" value="Debit/Credit Card Payments" required>
+  <label class="form-check-label" for="inlineRadio2">Debit/Credit Card Payments</label>
+</div>
+</div>
+</div>
+<input type="submit" class="btn btn-success" value="Confirm order"style="margin-top:70px">
+</form>
+</div>
+</div>
+</div>
+        <div class="col-md-4">
+            <h3>Checkout</h3>
+            <hr>
+            <p>Total amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=total%></p>
+            <P>Deliver charge:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30</P>        
+            <hr>
+            <p>Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=total+30%></p>
+            <hr>
+        </div>
+    </div>
+
+<hr>
+
+</div>
+
+
+
+<%function ischecked(){ %>
+    
+    <% var address= document.getElementById('inlineRadio1').checked %>
+   <% return true %>
+    
+<% }; %>
+
+
+<%- include ('../partials/footer')%>

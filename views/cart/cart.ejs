@@ -1,0 +1,55 @@
+<%- include ('../partials/header')%>
+<%var total=0;%>
+<%var delivery=30;%>
+
+
+<% if(user.cart.length<1){%>
+<div class="container text-center"style="padding:200px 40px">
+   <h4>Cart empty</h4>
+   <a href="/foods" class="btn btn-warning">Place Order</a>
+   <%delivery=0;%>
+</div>
+<% }else{ %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+          <div class="row"style="display:flex; flex-wrap: wrap; padding:10px 0">
+   <% user.cart.forEach(function(cart){ %>
+    <div class="col-md-4">
+        <div class="img-thumbnail">
+            <img  src="<%=cart.obj.image%>"class="img-fluid" alt="Responsive image">
+            <div class="caption">
+            <p><a href="/foods/<%= cart.obj.id %>" class="text-success"><%=cart.obj.name%></a></p>
+            <p id="inline"class="text-muted"><%= cart.peice%> peice</p>
+            <p id="inline"class="text-muted float-right"><%= cart.obj.price%>/ peice</p>
+            <form id="deleteform" action="/<%=user.id%>/cart/<%=cart.id%>?_method=DELETE" method="post">
+                       <button class="btn btn-sm btn-danger">Delete</button>
+                   </form>
+            </div>
+        </div>
+        
+        
+    </div>
+    <%total=total+(parseInt(cart.obj.price)*parseInt(cart.peice))%>
+<% }); %> 
+</div>  
+        </div>
+        <div class="col-md-4">
+            <h3>Checkout</h3>
+            <hr>
+            <p>Total amount:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=total%></p>
+            <P>Deliver charge:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=delivery%></P>        
+            <hr>
+            <p>Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=total+delivery%></p>
+            <form action="/<%=currentuser._id%>/cart/checkout/address" method="get">
+                <button class="btn btn-success">Checkout</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<% } %>
+
+
+<%- include ('../partials/footer')%>

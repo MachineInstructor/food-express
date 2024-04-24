@@ -1,0 +1,44 @@
+<%- include ('../partials/header')%>
+<div id="allingment">
+<div class="container">
+    <div class="row">
+        <div style="width:60%; margin:0 auto;">
+        <h2>Add new food</h2>
+    <form action="/foods" method="post" enctype="multipart/form-data">
+         <div class="form-group">
+        <input class="form-control" type="text" name="food[name]" placeholder="food name">
+        </div>
+        <div class="form-group">
+        <input class="form-control" type="number" name="food[price]" placeholder="price" min="0.01" step="0.01">
+        </div>
+         <div class="form-group">
+      <select id="inputState" class="form-control" name="food[type]">
+        <option selected>Select type</option>
+        <option>Non veg</option>
+        <option>veg</option>
+      </select>
+    </div>
+                     <div class="form-group">
+                    <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+         <div class="form-group">
+        <textarea class="form-control" type="textarea" name="food[description]" placeholder="description">Description</textarea>
+        </div>
+                 <div class="form-group">
+        <textarea class="form-control" type="textarea" name="food[recipe]" placeholder="description">Recipe</textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block">submit</button>
+        </div>
+           
+        <p><a href="/foods">Go Back</a></p>
+    </form> 
+    </div>
+    </div>
+    
+   
+</div>
+</div>
+
+
+<%- include ('../partials/footer')%>

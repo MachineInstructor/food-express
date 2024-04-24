@@ -1,0 +1,38 @@
+<%- include ('../partials/header')%>
+<div class="container">
+
+<form action="/<%=currentuser._id%>/cart/checkout/newaddress" method="post">
+<div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress"name="address[address]" placeholder="1234 Main St">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" name="address[address2]" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" name="address[city]" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState"name="address[state]" class="form-control">
+        <option selected>Choose...</option>
+        <option>Delhi</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control"name="address[zip]" id="inputZip">
+    </div>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Add address</button>
+</form>
+
+</div>
+
+
+
+<%- include ('../partials/footer')%>

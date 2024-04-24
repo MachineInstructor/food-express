@@ -1,0 +1,78 @@
+<%- include ('../partials/header')%>
+
+<div class="container">
+    
+    <div class="row"style="padding: 40px 0;">
+        <div class="col-md-5">
+            <p><h4><a class="text-danger" href="#"><%= food.name%></a></h4></p>
+           <p class="text-muted"><strong>serving size-</strong>2-4 Person</p>
+            <h5 class="text-success"><%=food.type%></h5>
+            <h5 class="text-warning"><strong>Ingredients</strong></h5>
+            <p><%=food.description%></p>
+            <h5>Recipe</h5>
+            <p><%=food.recipe%></p>
+            <h5>Rs-<%=food.price%>/peice</h5>
+            <form action="/foods/<%=food._id%>/new/cart" method="post">
+                <div class="form-group">
+        <input class="form-control" type="number" name="peice[peice]" placeholder="peice" min="1" step="1" required>
+        </div>
+            <input class="btn btn-primary" type="submit" value="Add to cart">
+            </form>
+            <!--<div class="list-group">-->
+            <!--    <li class="list-group-item active">info 1</li>-->
+            <!--    <li class="list-group-item">info 2</li>-->
+            <!--    <li class="list-group-item">info 3</li>-->
+            <!--    <p><a href="/foods">Go Back</a></p>-->
+            <!--</div>-->
+        </div>
+        <div class="col-md-7">
+            <div class="img-thumbnail">
+                <img class="img-fluid" alt="Responsive image" src="<%= food.image%>">
+                <div class="caption-full">
+                   
+                     
+                     <%if(currentuser && currentuser.isadmin.toString()==="true"){%>
+                     <a class="btn btn-sm btn-warning" href="/foods/<%=food._id%>/edit">Edit</a>
+                     <form id="deleteform" action="/foods/<%=food._id%>?_method=DELETE" method="post">
+                         <button class="btn btn-sm btn-danger">Delete</button>
+                     </form>
+                     <%}%>
+                     
+                </div>
+            </div>
+            
+            
+
+        </div>
+        </div>
+                    <div class="card text-black bg-light">
+             <div class="card-header">
+                 <form action="/foods/<%=food._id%>/comment" method="post">
+                 <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="comment[text]" placeholder="feedback">
+                    <div class="input-group-append">
+                        <input class="btn btn-success" type="submit" value="Add feedback">
+                    </div>
+                </div>
+                </form>
+             </div>
+            <div class="card-body">
+                    <%food.comment.forEach(function(comment){%>
+                <blockquote class="blockquote mb-0">
+                    <p><%=comment.text%></P>
+                    <span class="float-right"><%=comment.date%></span>
+                    
+                    <footer class="blockquote-footer">Written by <cite title="Source Title"><%=comment.author.username%></cite>
+                   
+                    </footer>
+                </blockquote>
+                 <hr>
+                 <% })%>
+             </div>
+        </div>
+        
+        </div>
+        
+            
+
+<%- include ('../partials/footer')%>

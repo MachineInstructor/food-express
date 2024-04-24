@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Ingredient express</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+ 
+       <link rel="stylesheet" href="/stylesheets/main.css">
+       <!--<link rel="stylesheet" href="/stylesheets/landing.css">-->
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class='navbar-header'>
+            <a class="navbar-brand"href="/">INGREDIENT EXPRESS</a>
+        </div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <div class="form-inline">
+                    <li class="nav-item">
+                <div class="d-flex justify-content-center">
+    <form action="/foods" method="GET" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+           </div>
+           </li>
+           </div>
+           
+                    <% if(!currentuser){%>
+                    <li class="nav-item">
+                 <a class="nav-link text-warning" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link text-danger" href="/register">Signup</a>
+            </li>
+            <% }else{%>
+            
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         welcome-<%=currentuser.firstname%>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/<%=currentuser._id%>/cart">Cart</a>
+          <a class="dropdown-item" href="/<%=currentuser._id%>/order">Order</a>
+           <%if(currentuser && currentuser.isadmin.toString()==="true"){%>
+           <a class="dropdown-item" href="/foods/new">Add new foods</a>
+           <a class="dropdown-item" href="/<%=currentuser._id%>/adminorder">All orders</a>
+          <a class="dropdown-item" href="/adminregister">Add new admin</a>
+          <%}%>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+      </li>
+            
+            <% }%>
+            
+            </ul>
+            </div>
+            </div>
+            </nav>
+            <!--<div class="container">-->
+    <%if(error && error.length>0){%>
+    <div class="alert alert-danger"id="margin" role="alert">
+  <%=error%>
+</div>
+<%}%>
+<%if(success && success.length>0){%>
+<div class="alert alert-success"id="margin" role="alert">
+  <%=success%>
+</div>
+<%}%>
+<!--</div>-->
+            

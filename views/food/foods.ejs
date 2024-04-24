@@ -1,0 +1,45 @@
+<%- include ('../partials/header')%>
+
+<header class="jumbotron" style="background-image:url(https://previews.123rf.com/images/vicushka/vicushka1602/vicushka160200117/52237375-asian-food-background-with-various-of-cooking-ingredients-on-rustic-background-top-view-banner-asian.jpg); background-size:100%;">
+      <!--<div class="container">-->
+          <h1 class="text-center text-warning">Welcome To Ingredient Express!</h1>
+    <p><h4 class="text-center">View Our Top Picked food</h4></p>
+      <!--</div>-->
+    
+</header>
+<!--<section class="container-fluid px-0">-->
+<!--<img  src="https://previews.123rf.com/images/vicushka/vicushka1602/vicushka160200117/52237375-asian-food-background-with-various-of-cooking-ingredients-on-rustic-background-top-view-banner-asian.jpg"class="img-fluid" alt="">-->
+<!--</section>-->
+    <div class="container">
+ <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="/foods">VEG</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/foods/nonveg">NON VEG</a>
+  </li>
+</ul>
+
+<div class="row" style="display:flex; flex-wrap: wrap; padding:10px 0">
+   <% food.forEach(function(food){ %>
+   <% if(food.type==="veg"){ %>
+    <div class="col-md-3 col-sm-6">
+        <div class="img-fluid img-thumbnail">
+            <img  src="<%=food.image%>"class="img-fluid" alt="Responsive image">
+            <div class="caption">
+            <h6><a href="/foods/<%= food._id %>" class="text-muted"><%=food.name%></a></h6>
+           <p><a href="/foods/<%= food._id %>" class="btn btn-outline-success btn-block">VIEW MORE</a></p> 
+            
+            </div>
+        </div>
+        
+        
+    </div>
+    <%}%>
+<% }); %> 
+</div>
+</div>
+
+
+
+<%- include ('../partials/footer')%>

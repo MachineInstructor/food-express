@@ -1,0 +1,125 @@
+<%- include ('../partials/header')%>
+
+<% if(user.order.length<1){%>
+<div class="container text-center"style="padding:200px 40px">
+   <h4>No orders here see you soon</h4> 
+   <a href="/foods" class="btn btn-warning">Place Order</a>
+</div>
+<% }else{ %>
+<% var st;%>
+
+<div class="container">
+    <% user.order.forEach(function(order){ %>
+    <%order.pstatus.forEach(function(stat){%>
+        <% st=stat%>
+   <% }) %>
+
+    <% if(st==="failed"){ %>
+    
+    
+    <div class="row">
+            <h4 class="text-danger">Transaction Failed Order Again</h4>
+        </div>
+    <div class="row">
+          <% order.oid.forEach(function(oid){ %>
+            <p id="inline"><strong>Order id -</strong><%=(user.username).toUpperCase()%>ORD<%=oid%></p>
+            <% }); %>
+       </div> 
+    
+ <div class="row"style="display:flex; flex-wrap: wrap; padding:10px 0">
+      <% order.image.forEach(function(image){ %>
+    <div class="col-md-2">
+        <div class="img-thumbnail">
+            <img  src="<%=image%>" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+         <% }); %>
+         </div>
+         <div class="row">
+         <% order.name.forEach(function(name){ %>
+         <div class="col-md-2">
+            <div class="caption">
+            <p><a href="/foods" class="text-success"><%=name%></a></p>
+            </div>
+            </div>
+            <% }); %>
+         </div>
+       <div class="row">
+          <% order.peice.forEach(function(peice){ %>
+          <div class="col-md-2">
+            <p id="inline"class="text-muted"><%= peice%> peice</p>
+            </div>
+            <% }); %>
+       </div> 
+       <div class="row">
+         <% order.price.forEach(function(price){ %>
+         <div class="col-md-2">
+         <p id="inline"class="text-muted"><%= price%>/ peice</p>
+          </div>
+         <% }); %>
+
+         </div>
+        <div class="row">
+            <p><strong>Address-</strong><%=order.address%>.</p>
+        </div>
+        <div class="row">
+           <p><strong>Payment type-</strong><%=order.payment%></p> 
+        </div>
+<hr>
+
+<% }else{ %>
+    <div class="row">
+            <h4>Will be delivered within 2 hour! enjoy your meal!!</h4>
+        </div>
+    <div class="row">
+          <% order.oid.forEach(function(oid){ %>
+            <p id="inline"><strong>Order id -</strong><%=(user.username).toUpperCase()%>ORD<%=oid%></p>
+            <% }); %>
+       </div> 
+    
+ <div class="row"style="display:flex; flex-wrap: wrap; padding:10px 0">
+      <% order.image.forEach(function(image){ %>
+    <div class="col-md-2">
+        <div class="img-thumbnail">
+            <img  src="<%=image%>" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+         <% }); %>
+         </div>
+         <div class="row">
+         <% order.name.forEach(function(name){ %>
+         <div class="col-md-2">
+            <div class="caption">
+            <p><a href="/foods" class="text-success"><%=name%></a></p>
+            </div>
+            </div>
+            <% }); %>
+         </div>
+       <div class="row">
+          <% order.peice.forEach(function(peice){ %>
+          <div class="col-md-2">
+            <p id="inline"class="text-muted"><%= peice%> peice</p>
+            </div>
+            <% }); %>
+       </div> 
+       <div class="row">
+         <% order.price.forEach(function(price){ %>
+         <div class="col-md-2">
+         <p id="inline"class="text-muted"><%= price%>/ peice</p>
+          </div>
+         <% }); %>
+
+         </div>
+        <div class="row">
+            <p><strong>Address-</strong><%=order.address%>.</p>
+        </div>
+        <div class="row">
+           <p><strong>Payment type-</strong><%=order.payment%></p> 
+        </div>
+<hr>
+<% } %>
+<% }); %>
+</div>
+
+<% } %>
+<%- include ('../partials/footer')%>
